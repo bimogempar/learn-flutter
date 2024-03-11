@@ -1,90 +1,42 @@
-import 'dart:convert';
-
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
-import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
 
-void main() async {
-  await AwesomeNotifications().initialize(
-    null,
-    [
-      NotificationChannel(
-          channelKey: 'alerts',
-          channelName: 'Alerts',
-          channelDescription: 'Notification tests as alerts',
-          playSound: true,
-          onlyAlertOnce: true,
-          groupAlertBehavior: GroupAlertBehavior.Children,
-          importance: NotificationImportance.High,
-          defaultPrivacy: NotificationPrivacy.Private,
-          defaultColor: Colors.deepPurple,
-          ledColor: Colors.deepPurple)
-    ],
-    debug: true,
-  );
-  runApp(const MyApp());
-}
+void main() => runApp(MyApp());
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  PusherChannelsFlutter pusher = PusherChannelsFlutter.getInstance();
-
-  @override
-  void initState() {
-    super.initState();
-    initPusherConnect();
-  }
-
-  void initPusherConnect() async {
-    try {
-      await pusher.init(
-          apiKey: '085a6eb21bd2d1912f89', cluster: 'ap1', onEvent: onEvent);
-      await pusher.subscribe(channelName: 'my-channel');
-      await pusher.connect();
-      print("SUCCESS CONNECT");
-    } catch (e) {
-      print("ERROR: $e");
-    }
-  }
-
-  void onEvent(PusherEvent event) {
-    print("ON EVENT: $event");
-    print("EVENT DATA: ${event.data}");
-
-    Map<String, dynamic> jsonData = json.decode(event.data);
-
-    print("WILL CREATE NOTIF");
-    pushNotif(jsonData);
-  }
-
-  void pushNotif(Map<String, dynamic> data) async {
-    print("DO CREATE NOTIF $data");
-    await AwesomeNotifications().createNotification(
-        content: NotificationContent(
-            id: data['id'],
-            channelKey: 'alerts',
-            title: data['title'],
-            body: data['body']));
-
-    print("SUCCESS CREATE NOTIF");
-  }
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Pusher Notification'),
+      title: 'Flutter Device Calendar',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Device Calendar"),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[],
         ),
-        body: Center(
-          child: Text("Pusher Notif Example"),
-        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
       ),
     );
   }
