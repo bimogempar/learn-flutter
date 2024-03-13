@@ -9,16 +9,15 @@ void main() async {
     null,
     [
       NotificationChannel(
-          channelKey: 'alerts',
-          channelName: 'Alerts',
-          channelDescription: 'Notification tests as alerts',
-          playSound: true,
-          onlyAlertOnce: true,
-          groupAlertBehavior: GroupAlertBehavior.Children,
-          importance: NotificationImportance.High,
-          defaultPrivacy: NotificationPrivacy.Private,
-          defaultColor: Colors.deepPurple,
-          ledColor: Colors.deepPurple)
+        channelKey: 'notification',
+        channelName: 'notification',
+        channelDescription: 'Notification',
+        playSound: true,
+        onlyAlertOnce: true,
+        groupAlertBehavior: GroupAlertBehavior.Children,
+        importance: NotificationImportance.High,
+        defaultPrivacy: NotificationPrivacy.Private,
+      ),
     ],
     debug: true,
   );
@@ -66,12 +65,15 @@ class _MyAppState extends State<MyApp> {
   void pushNotif(Map<String, dynamic> data) async {
     print("DO CREATE NOTIF $data");
     await AwesomeNotifications().createNotification(
-        content: NotificationContent(
-            id: data['id'],
-            channelKey: 'alerts',
-            title: data['title'],
-            body: data['body']));
-
+      content: NotificationContent(
+          id: data['id'],
+          bigPicture:
+              'https://www.citilink.co.id/uploads/462e6a16-1548-462b-bf56-9999819a688b/Sejarah_1110.jpg',
+          notificationLayout: NotificationLayout.Default,
+          channelKey: data['type'],
+          title: data['title'],
+          body: data['body']),
+    );
     print("SUCCESS CREATE NOTIF");
   }
 
