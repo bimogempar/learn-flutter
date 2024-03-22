@@ -37,6 +37,9 @@ dependencies:
   pusher_channels_flutter: ^2.2.1
   shared_preferences: ^2.2.2
   awesome_notifications: ^0.9.2
+  firebase_messaging: ^14.7.20
+  firebase_core: ^2.27.1
+  firebase_analytics: ^10.8.10
 
 dev_dependencies:
   flutter_test:

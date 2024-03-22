@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "910925911092",
+    "project_id": "hellociti-fb247",
+    "storage_bucket": "hellociti-fb247.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:910925911092:android:700b28d7b1af18a7782661",
+        "android_client_info": {
+          "package_name": "com.example.new_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6soJXSWmvvWstMkyb2y_8pLZQMmyFO9k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
